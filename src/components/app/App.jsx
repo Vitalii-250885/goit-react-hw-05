@@ -1,17 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { fetchMovies } from "../../api/moves";
 
 function App() {
+  const [movies, setMovies] = useState([]);
+
   useEffect(() => {
     const load = async () => {
       const resData = await fetchMovies();
-      console.log("🚀 ~ load ~ resData:", resData);
+      setMovies(resData);
     };
     load();
   }, []);
 
-  return <>App</>;
+  return (
+    <>
+      <ul>
+        {movies.map(({ id, title }) => (
+          <li key={id}>{title}</li>
+        ))}
+      </ul>
+    </>
+  );
 }
 
 export default App;
