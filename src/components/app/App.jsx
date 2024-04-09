@@ -1,25 +1,25 @@
-import { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
+
 import "./App.css";
-import { fetchMovies } from "../../api/moves";
+
+import HomePage from "../../pages/homePage/HomePage";
+import MoviesPage from "../../pages/moviesPage/MoviesPage";
+import NotFoundPage from "../../pages/notFoundPage/NotFoundPage";
+import MovieDetailsPage from "../../pages/movieDetailsPage/MovieDetailsPage";
+
+import Navigation from "../navigation/Navigation";
 
 function App() {
-  const [movies, setMovies] = useState([]);
-
-  useEffect(() => {
-    const load = async () => {
-      const resData = await fetchMovies();
-      setMovies(resData);
-    };
-    load();
-  }, []);
-
   return (
     <>
-      <ul>
-        {movies.map(({ id, title }) => (
-          <li key={id}>{title}</li>
-        ))}
-      </ul>
+      <Navigation />
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/movies" element={<MoviesPage />} />
+        <Route path="/movies/:movieId" element={<MovieDetailsPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
     </>
   );
 }
