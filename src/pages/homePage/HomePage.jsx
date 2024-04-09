@@ -21,7 +21,7 @@ const HomePage = () => {
       <h1 className={css.title}>Trending today</h1>
       <ul className={css["movies-list"]}>
         {movies.map(({ id, title }) => (
-          <MovieList key={id} title={title} />
+          <MovieList key={id} title={title} id={id} />
         ))}
       </ul>
     </div>
