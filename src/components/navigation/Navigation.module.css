@@ -1,23 +1,39 @@
 .navigation {
+  display: flex;
+  align-items: center;
+  position: absolute;
+
   width: 100%;
   height: 60px;
   padding-left: 20px;
 
-  background-color: #ffffff;
-  box-shadow: 5px 5px 10px grey;
+  background-color: #402000;
+  box-shadow: 5px 5px 10px;
 }
 
 .link {
   display: inline-flex;
   align-items: center;
 
-  padding: 20px;
+  margin-right: 5px;
+  padding: 10px;
 
   font-weight: bold;
+  border-radius: 8px;
 
-  color: #525252;
+  color: #ffffff;
+}
+
+.link:last-child {
+  margin-right: 0;
+}
+
+.active {
+  background-color: #ffffff;
+  color: #402000;
 }
 
 .link:hover {
-  color: #000000;
+  background-color: #ffffff;
+  color: #402000;
 }

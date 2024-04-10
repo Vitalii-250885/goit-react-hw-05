@@ -1,7 +1,18 @@
 .link {
-  color: #525252;
+  color: #ffffff;
+  padding: 8px;
+  margin: 50px 50px 100px 50px;
+
+  font-size: 28px;
+
+  border-radius: 8px;
+}
+
+.link:last-child {
+  margin-bottom: 0;
 }
 
 .link:hover {
-  color: #000000;
+  background-color: #402000;
+  color: #ffffff;
 }
