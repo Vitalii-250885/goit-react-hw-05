@@ -23,6 +23,9 @@ const MovieDetailsPage = () => {
   const date = new Date(dateMs);
   const year = date.getFullYear();
 
+  const userScorePercentages = userScore * 10;
+  const userScoreRound = Math.round(userScorePercentages);
+
   useEffect(() => {
     const load = async () => {
       const resData = await fetchAboutMovie(movieId);
@@ -60,6 +63,8 @@ const MovieDetailsPage = () => {
     return adult ? "/18+.png" : "/16+.png";
   };
 
+  const defaultImg = "/poster.jpg";
+
   return (
     <div
       className={css.container}
@@ -73,10 +78,11 @@ const MovieDetailsPage = () => {
       <div className={css.info}>
         <div className={css["image-section"]}>
           <img
-            src={`https://image.tmdb.org/t/p/w500${image}`}
+            src={image ? `https://image.tmdb.org/t/p/w500${image}` : defaultImg}
             alt=""
             className={css.image}
           />
+
           <img src={showAgeCategory()} alt="" className={css.age} />
 
           <h3 className={css["information-title"]}>Additional information</h3>
@@ -105,7 +111,7 @@ const MovieDetailsPage = () => {
             {title} ({year})
           </h2>
           <p className={css.score}>
-            {<AiTwotoneStar className={css.star} />} {userScore * 10}%
+            {<AiTwotoneStar className={css.star} />} {userScoreRound}%
           </p>
           <div className={css.overview}>
             <h3 className={css.subtitle}>Overview</h3>

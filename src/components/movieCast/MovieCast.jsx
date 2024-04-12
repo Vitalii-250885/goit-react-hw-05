@@ -5,6 +5,8 @@ import css from "./MovieCast.module.css";
 
 import { fetchMovieCast } from "../../api/moves";
 
+const defaultImg = "/user.jpg";
+
 const MovieCast = () => {
   const { movieId } = useParams();
 
@@ -27,10 +29,15 @@ const MovieCast = () => {
           <li key={id}>
             <div className={css.card}>
               <img
-                src={`https://image.tmdb.org/t/p/w500${profile_path}`}
+                src={
+                  profile_path
+                    ? `https://image.tmdb.org/t/p/w500${profile_path}`
+                    : defaultImg
+                }
                 alt={name}
                 className={css.image}
               />
+
               <h4 className={css.name}>{name}</h4>
               <p className={css.character}>
                 <span className={css["character-title"]}>Character: </span>
