@@ -11,10 +11,10 @@ const Navigation = () => {
 
   return (
     <nav className={css.navigation}>
-      <NavLink to="/" className={buildLinkClass}>
+      <NavLink to="/" className={buildLinkClass} state="/">
         Home
       </NavLink>
-      <NavLink to="/movies" className={buildLinkClass}>
+      <NavLink to="/movies" className={buildLinkClass} state="/movies">
         Movies
       </NavLink>
     </nav>

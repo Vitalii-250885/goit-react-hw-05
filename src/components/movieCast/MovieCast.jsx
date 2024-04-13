@@ -13,6 +13,7 @@ const MovieCast = () => {
   const [actors, setActors] = useState([]);
 
   useEffect(() => {
+    if (!movieId) return;
     const load = async () => {
       const resData = await fetchMovieCast(movieId);
 

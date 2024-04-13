@@ -11,6 +11,7 @@ const MovieReviews = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
+    if (!movieId) return;
     const load = async () => {
       const resData = await fetchMovieReviews(movieId);
 

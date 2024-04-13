@@ -1,6 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AiTwotoneStar } from "react-icons/ai";
-import { useParams, Link, NavLink, Outlet } from "react-router-dom";
+import {
+  useParams,
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+} from "react-router-dom";
 
 import { fetchAboutMovie } from "../../api/moves";
 
@@ -17,7 +23,6 @@ const MovieDetailsPage = () => {
   const [overview, setOverview] = useState("");
   const [genres, setGenres] = useState([]);
   const [isShow, setIsShow] = useState(false);
-  const [adult, setAdult] = useState(false);
 
   const dateMs = Date.parse(dateStr);
   const date = new Date(dateMs);
@@ -25,6 +30,9 @@ const MovieDetailsPage = () => {
 
   const userScorePercentages = userScore * 10;
   const userScoreRound = Math.round(userScorePercentages);
+
+  const location = useLocation();
+  const backLinkLocationRef = useRef(location.state?.from ?? "/");
 
   useEffect(() => {
     const load = async () => {
@@ -37,7 +45,6 @@ const MovieDetailsPage = () => {
         vote_average,
         overview,
         genres,
-        adult,
       } = resData;
       setImage(poster_path);
       setTitle(title);
@@ -46,7 +53,6 @@ const MovieDetailsPage = () => {
       setOverview(overview);
       setGenres(genres);
       setBackDrop(backdrop_path);
-      setAdult(adult);
     };
     load();
   }, [movieId]);
@@ -59,10 +65,6 @@ const MovieDetailsPage = () => {
     setIsShow(true);
   };
 
-  const showAgeCategory = () => {
-    return adult ? "/18+.png" : "/16+.png";
-  };
-
   const defaultImg = "/poster.jpg";
 
   return (
@@ -71,7 +73,7 @@ const MovieDetailsPage = () => {
       style={{
         backgroundImage: `url(https://image.tmdb.org/t/p/w500${backDrop})`,
       }}>
-      <Link to="/" className={css["go-back-button"]}>
+      <Link to={backLinkLocationRef.current} className={css["go-back-button"]}>
         ← Go back
       </Link>
 
@@ -82,8 +84,6 @@ const MovieDetailsPage = () => {
             alt=""
             className={css.image}
           />
-
-          <img src={showAgeCategory()} alt="" className={css.age} />
 
           <h3 className={css["information-title"]}>Additional information</h3>
           <ul className={css["information-list"]}>

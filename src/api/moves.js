@@ -2,42 +2,41 @@ import axios from "axios";
 
 axios.defaults.baseURL = "https://api.themoviedb.org/3";
 
+const options = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZDQ2ZTZkMDQwYTNhYmNhNGRmM2Y3OWE2YzM0N2JmZiIsInN1YiI6IjY2MTUzNGYxZTEwZjQ2MDE0YTM5MTJhMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QUPOb4fuP8vIPxSm2Uh1OHPymgtEc_q_D-IuwGez5PE",
+  },
+};
+
 const fetchMovies = async () => {
-  const res = await axios.get(
-    "/trending/movie/day?api_key=1d46e6d040a3abca4df3f79a6c347bff"
-  );
+  const res = await axios("/trending/movie/day?", options);
 
   return res.data.results;
 };
 
 const fetchAboutMovie = async (movieId) => {
-  const res = await axios.get(
-    `/movie/${movieId}?api_key=1d46e6d040a3abca4df3f79a6c347bff`
-  );
+  const res = await axios(`/movie/${movieId}?`, options);
 
   return res.data;
 };
 
 const fetchMovieCast = async (movieId) => {
-  const res = await axios.get(
-    `/movie/${movieId}/credits?api_key=1d46e6d040a3abca4df3f79a6c347bff`
-  );
+  const res = await axios(`/movie/${movieId}/credits?`, options);
 
   return res.data;
 };
 
 const fetchMovieReviews = async (movieId) => {
-  const res = await axios.get(
-    `/movie/${movieId}/reviews?api_key=1d46e6d040a3abca4df3f79a6c347bff`
-  );
+  const res = await axios(`/movie/${movieId}/reviews?`, options);
 
   return res.data.results;
 };
 
 const fetchMovieSearch = async (query) => {
-  const res = await axios.get(
-    `/search/movie?query=${query}&api_key=1d46e6d040a3abca4df3f79a6c347bff`
-  );
+  const res = await axios(`/search/movie?query=${query}`, options);
 
   return res.data.results;
 };

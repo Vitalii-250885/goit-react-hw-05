@@ -34,16 +34,6 @@
   border-top-left-radius: 20px;
 }
 
-.age {
-  position: absolute;
-
-  width: 100px;
-  height: 100px;
-
-  top: 500px;
-  left: 250px;
-}
-
 .description {
   display: block;
 
