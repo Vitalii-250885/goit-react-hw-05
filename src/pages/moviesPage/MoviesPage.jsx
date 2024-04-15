@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import css from "./MoviesPage.module.css";
 import { fetchMovieSearch } from "../../api/moves";
 import MovieList from "../../components/movieList/MovieList";
 
 const MoviesPage = () => {
-  const location = useLocation();
-
   const [movies, setMovies] = useState([]);
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -39,9 +37,7 @@ const MoviesPage = () => {
         </button>
       </form>
       <ul className={css["movies-list"]}>
-        {movies.map(({ id, title }) => (
-          <MovieList key={id} title={title} id={id} location={location} />
-        ))}
+        <MovieList movies={movies} />
       </ul>
     </div>
   );
